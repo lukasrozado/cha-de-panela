@@ -114,19 +114,3 @@ Site estático hospedado no GitHub Pages para confirmação de presença e reser
 - [Tailwind CSS via CDN](https://tailwindcss.com/docs/installation/play-cdn)
 
 ---
-
-## 🤝 Contribuições
-
-- Se desejar ajustar estilos ou adicionar recursos (ex.: filtro de busca, categorias de itens), edite `index.html` e, se necessário, inclua JS extra.
-- Mantenha a convenção de nomes: texto exato em `data-item` e slug em nome de arquivo de imagem.
-- Ao alterar Apps Script, lembre-se de nova implantação.
-
----
-
-## 📝 Licença
-
-Descreva a licença do seu projeto, se desejar (por exemplo MIT). Se for privado para uso pessoal, pode omitir.
-
----
-
-> Com este README, você e outros desenvolvedores terão orientação clara de como configurar, testar, estender e manter o site de Chá de Panela integrado ao Google Sheets/Apps Script. Bom trabalho! :)
