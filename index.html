@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chá de Panela - Lukas e Raphaela</title>
+  <!-- Meta description para SEO/social sharing (opcional) -->
+  <meta name="description" content="Confirme presença e reserve presentes para o Chá de Panela de Lukas e Raphaela">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #cdcfc0;
+      scroll-behavior: smooth;
+    }
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+    }
+    .btn-outline {
+      border: 1px solid #222;
+      padding: 0.75rem;
+      border-radius: 0.25rem;
+      transition: background 0.3s;
+    }
+    .btn-outline:hover {
+      background-color: #f1f1f1;
+    }
+    /* Estilo para mensagem de sucesso ou erro exibida via JS */
+    .message-box {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #e6ffed; /* verde claro */
+      border: 1px solid #34d399; /* verde */
+      color: #065f46;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      z-index: 1000;
+      display: none;
+    }
+    .message-box.error {
+      background-color: #ffe6e6;
+      border-color: #f87171;
+      color: #991b1b;
+    }
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <!-- Div para exibir mensagem de sucesso/erro via JS -->
+  <div id="message-box" class="message-box"></div>
+
+  <!-- Landing Page -->
+  <section class="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 py-20 bg-[#f3f7f3]" id="home">
+    <div class="text-center md:text-left mb-10 md:mb-0">
+      <!-- Ajuste o caminho: se index.html está na raiz e há pasta static/images/logo.png -->
+      <img src="static/images/logo.png" alt="Logo" class="mx-auto md:mx-0 w-92 mb-4">
+    </div>
+    <div class="bg-white p-6 rounded-md shadow-md w-full max-w-sm text-center space-y-4">
+      <a href="#confirmacao" class="block btn-outline">Confirmação de presença</a>
+      <a href="#presentes" class="block btn-outline">Lista de presentes</a>
+      <a href="#endereco" class="block btn-outline">Endereço</a>
+      <a href="#informacoes" class="block btn-outline">Outras informações</a>
+    </div>
+  </section>
+
+  <!-- Confirmação de presença -->
+  <section id="confirmacao" class="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-[#e9efe9]">
+    <h2 class="text-2xl font-semibold mb-6 text-center">CONFIRMAÇÃO DE PRESENÇA</h2>
+    <form id="form-confirmacao" class="flex flex-col gap-4 w-full max-w-md bg-white p-8 rounded-lg shadow-md"
+          method="POST"
+          action="https://formspree.io/f/xgvynzzj">
+      <!-- Identifica tipo de envio, opcional -->
+      <input type="hidden" name="tipo" value="confirmacao_presenca">
+      <input name="nome" type="text" placeholder="Seu nome" class="border p-3 rounded" required />
+      <input name="celular" type="tel" placeholder="Seu celular" class="border p-3 rounded" required />
+      <div class="flex flex-col gap-2 text-sm">
+        <label><input type="radio" name="confirmacao" value="Sim" required class="mr-2" />Com certeza vou</label>
+        <label><input type="radio" name="confirmacao" value="Não" class="mr-2" />Não poderei ir</label>
+        <label><input type="radio" name="confirmacao" value="Talvez" class="mr-2" />Ainda não sei se conseguirei ir</label>
+      </div>
+      <!-- Redirecionamento após envio: 
+           Para exibir mensagem de sucesso usando JS, adicionamos ?success=true antes do hash -->
+      <input type="hidden" name="_next" value="https://lukasrozado.github.io/cha-de-panela/?confirmado=true#confirmacao">
+      <!-- Personalizar assunto do e-mail no Formspree -->
+      <input type="hidden" name="_subject" value="Confirmação de Presença - Chá de Panela">
+      <!-- Anti-spam honeypot -->
+      <input type="text" name="_honey" style="display:none">
+      <button type="submit" class="bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">Enviar confirmação</button>
+    </form>
+  </section>
+
+  <!-- Lista de Presentes -->
+  <section id="presentes" class="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-white">
+    <h2 class="text-2xl font-semibold mb-6">Lista de presentes</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <!-- Exemplos de cartões de presentes; repita para cada item -->
+      <!-- Certifique-se de que as imagens em static/images/ sigam o slug correto -->
+      <div class="text-center border p-4 bg-white rounded shadow card-item" data-item="Jogo de Panelas Brinox Antiaderente Verde">
+        <img src="static/images/jogo-de-panelas-brinox-antiaderente-verde.jpg" alt="Jogo de Panelas Brinox Antiaderente Verde" width="300" height="300" class="mx-auto mb-2">
+        <p class="mb-2 font-semibold">Jogo de Panelas Brinox Antiaderente Verde</p>
+        <form method="POST" action="https://formspree.io/f/xgvynzzj" class="space-y-2 form-reserva">
+          <input type="hidden" name="item" value="Jogo de Panelas Brinox Antiaderente Verde">
+          <input type="text" name="nome" placeholder="Seu nome" required class="border p-2 rounded w-full">
+          <input type="tel" name="celular" placeholder="Seu celular" required class="border p-2 rounded w-full">
+          <input type="hidden" name="_next" value="https://lukasrozado.github.io/cha-de-panela/?reservado=true#presentes">
+          <input type="hidden" name="_subject" value="Reserva Chá de Panela - Jogo de Panelas Brinox Antiaderente Verde">
+          <input type="text" name="_honey" style="display:none">
+          <button type="submit" class="border px-4 py-2 w-full bg-green-600 text-white rounded hover:bg-green-700">Reservar</button>
+        </form>
+      </div>
+      <div class="text-center border p-4 bg-white rounded shadow card-item" data-item="Frigideira Work Verde">
+        <img src="static/images/frigideira-work-verde.jpg" alt="Frigideira Work Verde" width="300" height="300" class="mx-auto mb-2">
+        <p class="mb-2 font-semibold">Frigideira Work Verde</p>
+        <form method="POST" action="https://formspree.io/f/xgvynzzj" class="space-y-2 form-reserva">
+          <input type="hidden" name="item" value="Frigideira Work Verde">
+          <input type="text" name="nome" placeholder="Seu nome" required class="border p-2 rounded w-full">
+          <input type="tel" name="celular" placeholder="Seu celular" required class="border p-2 rounded w-full">
+          <input type="hidden" name="_next" value="https://lukasrozado.github.io/cha-de-panela/?reservado=true#presentes">
+          <input type="hidden" name="_subject" value="Reserva Chá de Panela - Frigideira Work Verde">
+          <input type="text" name="_honey" style="display:none">
+          <button type="submit" class="border px-4 py-2 w-full bg-green-600 text-white rounded hover:bg-green-700">Reservar</button>
+        </form>
+      </div>
+      <!-- Continue para cada item do seu reservas.json, no mesmo padrão -->
+      <!-- É recomendável usar um script local (generate_snippet.py) para gerar todos esses blocos automaticamente -->
+    </div>
+  </section>
+
+  <!-- Endereço -->
+  <section id="endereco" class="min-h-screen flex flex-col items-center justify-center px-4 py-20 bg-[#f8fdf8]">
+    <div class="text-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto w-12 h-12 mb-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"/>
+      </svg>
+      <h2 class="text-2xl font-medium mb-2 tracking-wide font-serif">ENDEREÇO</h2>
+      <p class="uppercase text-sm tracking-widest text-gray-600 mb-6">Rua Araguaia, Nº 1215 - Freguesia (Jacarepaguá) - Salão de Festas</p>
+
+      <!-- Botões de localização -->
+      <div class="flex flex-wrap justify-center gap-3 text-sm">
+        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Araguaia,+1215+-+Freguesia,+Rio+de+Janeiro" 
+           target="_blank"
+           class="border border-gray-800 px-4 py-2 rounded hover:bg-gray-100 transition">
+          Abrir no Google Maps
+        </a>
+        <a href="https://waze.com/ul?ll=-22.925768,-43.356173&navigate=yes" 
+           target="_blank"
+           class="border border-gray-800 px-4 py-2 rounded hover:bg-gray-100 transition">
+          Abrir no Waze
+        </a>
+        <a href="https://moovitapp.com?to=Rua+Araguaia+1215+Freguesia+RJ" 
+           target="_blank"
+           class="border border-gray-800 px-4 py-2 rounded hover:bg-gray-100 transition">
+          Abrir no Moovit
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outras informações -->
+  <section id="informacoes" class="min-h-[50vh] flex items-center justify-center bg-[#ecf5ec] px-4 py-12">
+    <div class="text-center max-w-2xl">
+      <h2 class="tracking-widest text-xl md:text-2xl font-medium mb-2 uppercase">Outras informações</h2>
+      <hr class="border-t border-gray-400 mb-6 w-full max-w-md mx-auto">
+
+      <div class="space-y-8 text-gray-700 text-base leading-relaxed text-left">
+        <div>
+          <p><strong>Convite individual</strong></p>
+          <p>Infelizmente o espaço tem limite de pessoas, por isso cada convite é individual.</p>
+          <hr class="my-4 border-gray-300">
+        </div>
+
+        <div>
+          <p><strong>Horário</strong></p>
+          <p>Começa às 14h e termina às 18h. Por favor, não se atrasem.</p>
+          <hr class="my-4 border-gray-300">
+        </div>
+
+        <div>
+          <p><strong>Bebidas</strong></p>
+          <p>Não haverá nenhuma bebida alcoólica, principalmente cerveja. Não irei comprar e não quero que ninguém leve.</p>
+          <hr class="my-4 border-gray-300">
+        </div>
+
+        <div>
+          <p><strong>Estacionamento</strong></p>
+          <p>Existem 2 estacionamentos próximos ao prédio: um a 140m e outro a 160m.</p>
+          <hr class="my-4 border-gray-300">
+        </div>
+
+        <div>
+          <p><strong>Confirmação</strong></p>
+          <p>Por favor, confirme sua presença até o dia <strong>26/07/2025</strong>. Caso contrário, entenderei que você não irá comparecer e não colocarei seu nome na lista.</p>
+          <hr class="my-4 border-gray-300">
+        </div>
+
+        <div>
+          <p><strong>Dúvidas</strong></p>
+          <p>Caso tenha dúvidas, entre em contato conosco. Estamos ansiosos para compartilhar esse momento especial com você!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript para exibir mensagem de sucesso ou erro -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const box = document.getElementById("message-box");
+      // Verifica parâmetros na URL: ?confirmado=true ou ?reservado=true
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("confirmado")) {
+        box.textContent = "Obrigado! Sua confirmação de presença foi recebida.";
+        box.classList.remove("error");
+        box.style.display = "block";
+        // Opcional: remover o parâmetro da URL para evitar reaparecer ao rolar a página
+        history.replaceState(null, "", window.location.pathname + "#confirmacao");
+      } else if (params.has("reservado")) {
+        box.textContent = "Obrigado! Sua solicitação de reserva foi enviada.";
+        box.classList.remove("error");
+        box.style.display = "block";
+        history.replaceState(null, "", window.location.pathname + "#presentes");
+      }
+      // Poderia detectar erro via outro parâmetro, ex: ?error=true e então:
+      if (params.has("error")) {
+        box.textContent = "Ocorreu um erro ao enviar. Tente novamente mais tarde.";
+        box.classList.add("error");
+        box.style.display = "block";
+        // Remover do query string:
+        history.replaceState(null, "", window.location.pathname);
+      }
+    });
+  </script>
+</body>
+</html>
