@@ -66,22 +66,32 @@
   </section>
 
   <!-- Confirmação de presença -->
-  <section id="confirmacao" class="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-[#e9efe9]">
-    <h2 class="text-2xl font-semibold mb-6 text-center">CONFIRMAÇÃO DE PRESENÇA</h2>
-    <form id="form-confirmacao" class="flex flex-col gap-4 w-full max-w-md bg-white p-8 rounded-lg shadow-md"
-          action="https://script.google.com/macros/s/AKfycbzEO2Y0lHaDHWQ6A4-DGPHYLg3OcWRAVrGLiU4oo32PXtZE3T6dlPUca4qu2e2qctyC/exec"
-          method="post">
-      <input type="hidden" name="tipo" value="confirmacao_presenca">
-      <input name="nome" type="text" placeholder="Seu nome" class="border p-3 rounded" required />
-      <input name="celular" type="tel" placeholder="Seu celular" class="border p-3 rounded" required />
-      <div class="flex flex-col gap-2 text-sm">
-        <label><input type="radio" name="confirmacao" value="Sim" required class="mr-2" />Com certeza vou</label>
-        <label><input type="radio" name="confirmacao" value="Não" class="mr-2" />Não poderei ir</label>
-        <label><input type="radio" name="confirmacao" value="Talvez" class="mr-2" />Não conseguirei ir, mas quero dar um presente</label>
-      </div>
-      <button type="submit" class="bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">Enviar confirmação</button>
-    </form>
-  </section>
+<section id="confirmacao" class="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-[#e9efe9]">
+  <h2 class="text-2xl font-semibold mb-8 text-center">CONFIRMAÇÃO DE PRESENÇA</h2>
+
+  <div class="w-full max-w-2xl bg-white p-10 rounded-xl shadow-md text-gray-800 space-y-6 text-left">
+    <p class="text-lg leading-relaxed">
+      <strong>Poxa, o prazo para confirmar presença já passou! 🕒</strong><br>
+      A data limite estava nas informações do convite e foi avisada com muito carinho algumas vezes.
+    </p>
+
+    <p class="text-lg leading-relaxed">
+      <strong>Mas não se preocupe! 💚</strong><br>
+      Quem ainda não escolheu um presente pode dar uma olhadinha na nossa lista!<br>
+      E se você não puder estar com a gente no dia, saiba que ficaremos super felizes com seu carinho à distância também. 🎁✨
+    </p>
+
+    <div class="bg-[#f4f4f4] border border-gray-300 rounded-md p-4 text-sm leading-relaxed">
+      <strong>Obs:</strong> Ah! E pra quem mandou mensagem no privado dizendo que vinha, mas não confirmou aqui pelo site...<br>
+      Como avisamos antes, só conseguimos considerar as confirmações feitas por aqui mesmo. 💻✨
+    </div>
+
+    <p class="text-base text-center">Qualquer dúvida, estamos por aqui! 💌</p>
+  </div>
+</section>
+
+
+
 
   <!-- Lista de Presentes -->
   <section id="presentes" class="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-white">
